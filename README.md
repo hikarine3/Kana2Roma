@@ -58,16 +58,7 @@ Hajime Kurita
 - EN: https://twitter.com/hajimekurita
 - JP: https://twitter.com/hikarine3
 
-## Corporation page / 会社ページ / 公司页面
-- EN: https://1stclass.co.jp/en/
-- CN: https://1stclass.co.jp/zh/
-- JP: https://1stclass.co.jp/
-
-## Blog
-- EN: https://en.sakuhindb.com/pe/Administrator/
-- JP: https://sakuhindb.com/pj/6_B4C9CDFDBFCDA4B5A4F3/
-
-## Techincoal web services / 提供してる技術関連Webサービス / Techincoal Web服务
+## Techincal web services / 提供してる技術関連Webサービス / Techincoal Web服务
 ### VPS & Infra comparison / VPS比較 / VPS比较
 - EN: https://vpsranking.com/en/
 - CN: https://vpsranking.com/zh/

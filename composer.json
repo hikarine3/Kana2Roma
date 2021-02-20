@@ -1,5 +1,6 @@
 {
-    "name": "hikarine3/csv-parser",
+    "name": "hikarine3/kana2roma",
+    "version": "1.0.0",
     "description": "Convert Hiragana to Romaji",
     "homepage": "https://github.com/hikarine3/Kana2Roma",
     "keywords": ["hiragana", "japanese", "romaji", "convert"],
