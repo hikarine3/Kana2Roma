@@ -60,9 +60,14 @@ print($romaji);
 		$txt=mb_convert_kana($txt,"c",$this->charset);
 		$stack = $this->_TextSlice($txt);
 		$out = array();
+
 		for ($i = 0; $i <count($stack); $i++) {
 			if(mb_strlen($stack[$i],$this->charset) == 1){
-				$str = $this->_baseOne($stack[$i]);
+                $pre_char = '';
+                if($i>0){
+                    $pre_char = $stack[$i-1];
+                }
+				$str = $this->_baseOne($stack[$i], $pre_char);
 				$out[]=$this->stringChopper($str);
 			}else{
 				$str2 = $this->_baseTwo($stack[$i]);
@@ -83,7 +88,7 @@ print($romaji);
 		$n = 0;
 		$array = [];
 		for ($i = 0; $i <$max; $i++) {
-			++$n;//次
+			++$n;
 			$str = mb_substr($txt,$i,1);//今の文字
 			$nxt = mb_substr($txt,$n,1);//次の文字
 			//隣接する１文字目が小文字や行なら
@@ -91,7 +96,8 @@ print($romaji);
 				$array[]=$str.$nxt;
 				$i++;
 				$n++;
-			}else if($str=="っ" && array_search($nxt,$this->symbol)===false ){
+			}
+            else if($str=="っ" && array_search($nxt,$this->symbol)===false ){
 				if(array_search($nxt,$this->number)===false){
 					$array[]=$str.$nxt;
 					$i++;
@@ -99,7 +105,8 @@ print($romaji);
 				}else{
 					$array[]=$str;
 				}
-			}else{
+			}
+            else{
 				$array[]=$str;
 			}
 		}
@@ -129,7 +136,8 @@ print($romaji);
 			}else{
 				return $this->_baseOne($str);
 			}
-		}else{
+		}
+        else{
 			switch($str){
 				case "ちゃ":
 					return $this->mode_TYrows.$this->vowel[0];
@@ -165,26 +173,56 @@ print($romaji);
 			}
 		}
 	}
+
+    public function _change_bar($char, $pre_char) {
+		if(array_search($pre_char,$this->cols_H['A'])!==false){
+			return 'a';
+		}else if(array_search($pre_char,$this->cols_H['I'])!==false){
+			return 'i';
+		}else if(array_search($pre_char,$this->cols_H['U'])!==false){
+			return 'u';
+		}else if(array_search($pre_char,$this->cols_H['E'])!==false){
+			return 'e';
+        }else if(array_search($pre_char,$this->cols_H['O'])!==false){
+            return 'o';
+		}else if(array_search($pre_char,$this->symbol) !== false){
+			return '';
+		}else if(array_search($pre_char,$this->number) !== false){
+			return '';
+		}else{
+			return '';
+		}
+    }
 	
 	//変換ベース（1文字）
 	//あいうえお行の配列（cols_H,number,symbol）から文字が何かを判別して各関数へ処理を分配する
 	//@param {Object} str　変換する文字（１文字のみ）
-	function _baseOne($str){
-		if(array_search($str,$this->cols_H['A'])!==false){//あ行
+	function _baseOne($str, $prechar = ''){
+        if($str == 'ー' || $str == '〜' || $str == '−') {
+            return $this->_change_bar($str, $prechar);
+        }
+		else if(array_search($str,$this->cols_H['A'])!==false){
 			return $this->_Change_A_Rows(array_search($str,$this->cols_H['A']));
-		}else if(array_search($str,$this->cols_H['I'])!==false){//い行
+		}
+        else if(array_search($str,$this->cols_H['I'])!==false){
 			return $this->_Change_I_Rows(array_search($str,$this->cols_H['I']));
-		}else if(array_search($str,$this->cols_H['U'])!==false){//う行
+		}
+        else if(array_search($str,$this->cols_H['U'])!==false){
 			return $this->_Change_U_Rows(array_search($str,$this->cols_H['U']));
-		}else if(array_search($str,$this->cols_H['E'])!==false){//え行
+		}
+        else if(array_search($str,$this->cols_H['E'])!==false){
 			return $this->_Change_E_Rows(array_search($str,$this->cols_H['E']));
-		}else if(array_search($str,$this->cols_H['O'])!==false){//お行
+		}
+        else if(array_search($str,$this->cols_H['O'])!==false){
 			return $this->_Change_O_Rows(array_search($str,$this->cols_H['O']));
-		}else if(array_search($str,$this->symbol) !== false){//記号
+		}
+        else if(array_search($str,$this->symbol) !== false){//記号
 			return $this->symbol[array_search($str,$this->symbol)];
-		}else if(array_search($str,$this->number) !== false){//数字
+		}
+        else if(array_search($str,$this->number) !== false){//数字
 			return $str;
-		}else{
+		}
+        else{
 			return NULL;
 		}
 	}
