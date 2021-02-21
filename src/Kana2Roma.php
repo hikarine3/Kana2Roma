@@ -2,6 +2,7 @@
 /*
 Official URL: https://github.com/hikarine3/Kana2Roma
 Author: Hajime Kurita
+Derived from https://gist.github.com/kijtra/984256/07ebd33785c409138c9126c1a144f984798a893e and made it workable as wished
 */
 namespace Hikarine3;
 
