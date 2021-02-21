@@ -9,6 +9,26 @@ https://tenderfeel.xsrv.jp/mootools/382/
 
 https://gist.github.com/kijtra/984256/07ebd33785c409138c9126c1a144f984798a893e
 
+# How to install / どうインストールするか
+```
+composer require hikarine3/roma2kana;
+```
+
+そしてcomposer.jsonのautoloadのセクションに追加してからcomposer dump-autoloadと打って下さい
+```
+
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "classmap": [
+            "vendor/hikarine3/csv-parser/src",
+            "vendor/hikarine3/kana2roma/src"
+        ]
+    },
+```
 
 # How to use / どう使うか
 
