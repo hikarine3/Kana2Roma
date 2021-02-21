@@ -32,7 +32,7 @@ class Kana2Roma
 		"E" => ["え","け","せ","て","ね","へ","め","＠","れ","＠","げ","ぜ","で","べ","ぺ","ぇ"],
 		"O" => ["お","こ","そ","と","の","ほ","も","よ","ろ","を","ご","ぞ","ど","ぼ","ぽ","ぉ","ょ"]
     ];
-	private $const=NULL;
+	private $const = NULL;
 
 	public function show_help() 
 	{
@@ -46,7 +46,7 @@ print($romaji);
 	public function __construct($txt=NULL){
 		if(!empty($txt)){
 			$this->const=$txt;
-			return $this->conv($txt);
+			return $this->convert($txt);
 		}
 	}
 
